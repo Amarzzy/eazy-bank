@@ -2,9 +2,11 @@ package com.amar.account.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import lombok.*;
 
 @Entity
-public class Accounts {
+@Setter @Getter @AllArgsConstructor @NoArgsConstructor @ToString
+public class Accounts extends BaseEntity {
 
     private Long customerId;
 
