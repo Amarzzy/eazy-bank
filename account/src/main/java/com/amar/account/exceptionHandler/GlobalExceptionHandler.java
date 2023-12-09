@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @RestControllerAdvice
 //@ControllerAdvice
-public class GlobalExceptionHandler extends RuntimeException {
+public class GlobalExceptionHandler{
 
     @ExceptionHandler(CustomerAlreadyExistsException.class)
     private ResponseEntity<ExceptionResponseDto> handleCustomerAlreadyExistsException(CustomerAlreadyExistsException exception, WebRequest webRequest) {
