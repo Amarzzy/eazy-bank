@@ -34,4 +34,35 @@ public class AccountController {
                 .body(new ResponseDto(AccountConstants.STATUS_201,AccountConstants.MESSAGE_201));
     }
 
+
+    @PutMapping("/update")
+    public ResponseEntity<ResponseDto> updateAccount(@RequestBody CustomerDto customerDto){
+        boolean isUpdated = iAccountService.updateAccount(customerDto);
+        if(!isUpdated){
+            return ResponseEntity
+                    .status(HttpStatus.EXPECTATION_FAILED)
+                    .body(new ResponseDto(AccountConstants.STATUS_417, AccountConstants.MESSAGE_417_UPDATE));
+        }
+        else return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new ResponseDto(AccountConstants.STATUS_200, AccountConstants.MESSAGE_200));
+    }
+
+    @GetMapping("/fetch")
+    public ResponseEntity<CustomerDto> fetchAccount(@RequestParam  String mobileNumber){
+        CustomerDto customerDto = iAccountService.fetchAccount(mobileNumber);
+        return ResponseEntity
+                .ok(customerDto);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<ResponseDto> deleteAccount(@RequestParam String mobileNumber){
+        Boolean isUpdated = iAccountService.deleteAccount(mobileNumber);
+        if(isUpdated) return ResponseEntity
+                .ok(new ResponseDto(AccountConstants.MESSAGE_200, AccountConstants.MESSAGE_200));
+        else return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ResponseDto(AccountConstants.STATUS_417, AccountConstants.MESSAGE_417_DELETE));
+    }
+
 }
